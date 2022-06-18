@@ -1,0 +1,62 @@
+[
+  {
+    "index": 0,
+    "title": "Invoking jq",
+    "link": "https://stedolan.github.io/jq/manual/#Invokingjq"
+  },
+  {
+    "index": 1,
+    "title": "Types and Values",
+    "link": "https://stedolan.github.io/jq/manual/#TypesandValues"
+  },
+  {
+    "index": 2,
+    "title": "Builtin operators and functions",
+    "link": "https://stedolan.github.io/jq/manual/#Builtinoperatorsandfunctions"
+  },
+  {
+    "index": 3,
+    "title": "Conditionals and Comparisons",
+    "link": "https://stedolan.github.io/jq/manual/#ConditionalsandComparisons"
+  },
+  {
+    "index": 4,
+    "title": "Regular expressions (PCRE)",
+    "link": "https://stedolan.github.io/jq/manual/#RegularexpressionsPCRE"
+  },
+  {
+    "index": 5,
+    "title": "Advanced features",
+    "link": "https://stedolan.github.io/jq/manual/#Advancedfeatures"
+  },
+  {
+    "index": 6,
+    "title": "Math",
+    "link": "https://stedolan.github.io/jq/manual/#Math"
+  },
+  {
+    "index": 7,
+    "title": "I/O",
+    "link": "https://stedolan.github.io/jq/manual/#IO"
+  },
+  {
+    "index": 8,
+    "title": "Streaming",
+    "link": "https://stedolan.github.io/jq/manual/#Streaming"
+  },
+  {
+    "index": 9,
+    "title": "Assignment",
+    "link": "https://stedolan.github.io/jq/manual/#Assignment"
+  },
+  {
+    "index": 10,
+    "title": "Modules",
+    "link": "https://stedolan.github.io/jq/manual/#Modules"
+  },
+  {
+    "index": 11,
+    "title": "Colors",
+    "link": "https://stedolan.github.io/jq/manual/#Colors"
+  }
+]
