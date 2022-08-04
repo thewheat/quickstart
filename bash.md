@@ -211,7 +211,7 @@ $(($i + 1))    # arithmetic expansion `echo $(($i + 1))`
 
 **Other syntax**
 ```
-$[$i+1]        # old deprecated arithmetic expansion  `echo $[$i+1]]
+$[$i+1]        # old deprecated arithmetic expansion  `echo $[$i+1]`
 let a=1+1      # `let` keyword is specific to certain shells for variable assignment
 $(expr 1 + 1)  # uses `expr` to evaluate `echo $(expr 1 + 1)`
 ```
