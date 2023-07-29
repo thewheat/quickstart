@@ -343,6 +343,27 @@ cat jq.json | jq '.[] | select(.index < 4)'
   "title": "Builtin operators and functions",
   "link": "https://stedolan.github.io/jq/manual/#Builtinoperatorsandfunctions"
 }
+
+
+cat jq.json | jq '.[] | select(.title=="Colors" or .title=="Modules")'
+{
+  "index": 10,
+  "title": "Modules",
+  "link": "https://stedolan.github.io/jq/manual/#Modules"
+}
+{
+  "index": 11,
+  "title": "Colors",
+  "link": "https://stedolan.github.io/jq/manual/#Colors"
+}
+
+
+cat jq.json | jq '.[] | select(.index >= 10 and .title=="Modules")'
+{
+  "index": 10,
+  "title": "Modules",
+  "link": "https://stedolan.github.io/jq/manual/#Modules"
+}
 ```
 
 ## Deleting keys
