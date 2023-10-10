@@ -644,6 +644,34 @@ with open('test.txt', "a") as f:
   f.write('test')
 ```
 
+## Read / Deleting Paths
+
+```
+import os
+
+for f in os.listdir(path):
+  full_path = os.path.join(path, f)
+  print(full_path)
+
+
+# delete folder recursively
+import os
+
+def delete_folder(path):
+  if os.path.exists(path):
+    for f in os.listdir(path):
+      full_path = os.path.join(path, f)
+      if os.path.isdir(full_path):
+        delete_folder(full_path)
+        os.rmdir(full_path)
+      else:
+        os.remove(full_path)
+  os.rmdir(path)
+
+# delete folder recursively
+import shutil
+shutil.rmtree(OUT)
+```
 ### `open()` modes
 ```
 open(file, mode='r', buffering=- 1, encoding=None, errors=None, newline=None, closefd=True, opener=None)¶
