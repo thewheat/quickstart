@@ -700,6 +700,24 @@ with open('test.json', "r") as f:
   print(y)
 ```
 
+## Exceptions / Errors
+
+```
+     try:
+         x = int(input("Please enter a number: "))
+         break
+     except ValueError:
+         print("Oops!  That was no valid number.  Try again")
+
+```
+
+- Can have multiple errors
+```
+except (RuntimeError, TypeError, NameError):
+     pass
+```
+
+
 * * * 
 
 args
