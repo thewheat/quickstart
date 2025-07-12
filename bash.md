@@ -78,9 +78,25 @@ variable="Outside of function"
 function functionName()
 {
     # scope variable to function and do not override global scope
+
     local variable=$1;
     local secondArguement=$2;
     echo "Argument is $variable"
+
+    echo "Loop through all arguments"
+    # loop through all arguments
+    for a in $@; do
+        echo "arg: $a";
+    done;
+
+    # pop first element from argument list
+    echo "Pop off first element"
+    shift
+    echo "Loop through new list of arguments"
+    # loop through all current arguments after shift
+    for a in $@; do
+        echo $a;
+    done;
 }
 
 echo $variable       # "Outside of function"
@@ -183,6 +199,24 @@ for i in web{0..10};do
    echo ${i};
 done;
 ```
+
+```
+for filename in *.md; do
+    echo $filename
+done
+```
+
+## Reading file line by line
+while read -r line
+do
+  echo "current line: $line"
+done < notes.txt
+
+## Reading output of command line by line
+$ while read -r line
+do
+  echo "current line: $line"
+done < <(echo "a\nb\nc")
 
 ### Multiple Conditions
 
