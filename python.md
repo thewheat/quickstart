@@ -1,4 +1,4 @@
-# [WIP] Python
+# Python
 
 https://learnxinyminutes.com/docs/python/
 https://docs.python.org/3/tutorial/index.html
@@ -209,13 +209,17 @@ print (users['Hans'] == 'active') # True
 print ('Hans' in users) # True
 print ('Hans' not in users) # False
 
-for user, status in users.items():
+for key, value in users.items():
+  name = key
+  status = value
   if status == 'active':
-    print(user)
+    print(name)
 
-for user_status_data in users.items():
-  if user_status_data[1] == 'active':
-    print(user_status_data[0])
+for item_data in users.items():
+  name = item_data[0] # key
+  status = item_data[1] # value
+  if status == 'active':
+    print(item_data[0])
 ```
 
 ```
@@ -700,6 +704,50 @@ with open('test.json', "r") as f:
   print(y)
 ```
 
+## YAML
+
+- Using `PyYAML==6.0.2`
+```
+import yaml
+
+## test.yaml
+# sites:
+#   a:
+#     name: "a site"
+#     aliases
+#       - sitea.com
+#       - asite.com
+#   b:
+#     name: "site b"
+#     aliases
+#       - beesite.com
+#       - siteofabee.com
+
+with open("test.yaml", "r") as stream:
+    try:
+        yaml_data = yaml.safe_load(stream)
+
+        print(yaml_data)
+        print(yaml.dump(yaml_data))
+
+        for site_data in yaml_data['sites'].values():
+          print(site_data)
+          print(site_data['name'])
+          if 'aliases' in site_data:
+            print(site_data['aliases'])
+
+
+        for site_key, site_data in yaml_data['sites'].items():
+          print("%s" % (site_key))
+          print(site_data['name'])
+          if 'aliases' in site_data:
+            print(site_data['aliases'])
+
+
+    except yaml.YAMLError as exc:
+        print(exc)
+```
+
 ## Exceptions / Errors
 
 ```
@@ -740,4 +788,116 @@ list_str = ["1", "4", "9", "16", "25"]
 [4, 9, 16, 25, 111]
 ['1', '4', '9', '16', '25']
 ['1', '16', '25', '4', '9']
+```
+
+## Regex
+
+- Requires `re` module (`import re`)
+- 2 ways to call regex
+  - use `re.FUNCTION(REGULAR_EXPRESSION, STRING)`
+  - compile re pattern `p = re.compile(REGULAR_EXPRESS)` then call function on patter `p.FUNCTION(STRING)`
+
+
+### Matching / Searching
+
+- `.match()` / `.search()`
+  - `.match()` will only report a successful match which will start at 0; if the match wouldn’t start at zero, match() will not report it.
+  - `.search()` will scan forward through the string, reporting the first match it finds.
+- Resulting object
+  - `group()`: Return the string matched by the RE
+  - `start()`: Return the starting position of the match
+  - `end()`: Return the ending position of the match
+  - `span()`: Return a tuple containing the (start, end) positions of the match
+
+```
+import re
+
+p = re.compile('[a-z]+', re.MULTILINE | re.IGNORECASE)
+m = p.search("abcd\ndef")
+m = p.match("abcd\ndef")
+m.group() # 'abcd'
+m.start() # 0
+m.end()   # 4
+m.span()  # (0, 4)
+
+# match / search
+print(re.match('super', 'insuperable')) # None
+print(re.search('super', 'insuperable').span()) # (2, 7)
+
+
+p.findall("abcd\ndef") # ['abcd', 'def']
+
+iterator = p.finditer("abcd\ndef")
+for match in iterator:
+  print(match.group())
+```
+
+### Grouping
+
+```
+p = re.compile('(a(b)c)d')
+m = p.match('abcd')
+m.groups()     # ('abc', 'b')
+m.group(0)     # 'abcd'
+m.group(1)     # 'abc'
+m.group(2)     # 'b'
+m.group(0,1,2) # ('abcd', 'abc', 'b')
+```
+
+### Split
+
+```
+p = re.compile(r'\W+')
+p.split('This is a test')           # ['This', 'is', 'a', 'test']
+p.split('This is a test', 2)        # ['This', 'is', 'a test']
+
+re.split(r'\W+', 'This is a test')  # ['This', 'is', 'a', 'test']
+```
+
+### Substitution / Search and Replace
+
+```
+p = re.compile('(blue|white|red)')
+p.sub('colour', 'blue socks and red shoes')           # 'colour socks and colour shoes'
+p.sub('colour', 'blue socks and red shoes', count=1)  # 'colour socks and red shoes'
+p.sub(r'colour: \1', 'blue socks and red shoes').     # 'colour: blue socks and colour: red shoes'
+```
+
+## HTTP requests
+
+```
+import json
+import requests
+
+def getRequest(url)
+    headers = {'Header1': "header value"}
+    return requests.get(url, headers=headers)
+
+response = getRequest(url)
+text = response.text
+if(response.status_code > 302):
+    print(response.status_code)
+    print(text)
+else:
+    json_data = json.loads(text)
+    return json_data
+```
+
+## Call external commands via subprocess
+
+```
+# recommended way with full outputs
+result = subprocess.run(" ".join(cmd), shell=True, capture_output=True)
+print(result.returncode)
+if(result.stderr):
+    print(result.stderr.decode("utf-8"))
+if(result.stdout):
+    json_data = json.loads(result.stdout.decode("utf-8"))
+
+
+# only outputs value. raises CalledProcessError if non-zero exit code
+cmd = ['curl', '-sSLD', '-', '-o', '/dev/null', 'https://' + domain]
+returned_value = subprocess.check_output(cmd)
+print(returned_value.decode("utf-8"))
+```
 
