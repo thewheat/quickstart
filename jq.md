@@ -364,6 +364,9 @@ cat jq.json | jq '.[] | select(.index >= 10 and .title=="Modules")'
   "title": "Modules",
   "link": "https://stedolan.github.io/jq/manual/#Modules"
 }
+
+
+curl -sH "Fastly-Key: $FASTLY_API_KEY" "https://api.fastly.com/service/search?name=$1" | jq '. | [ {id: .id, name: .name, customer_id: .customer_id, version: (.versions [] | select(.active == true)).number } ] '
 ```
 
 ## Deleting keys
